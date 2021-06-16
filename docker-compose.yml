@@ -18,7 +18,7 @@ services:
         networks:
             - sail
         depends_on:
-            - pgsql
+            - mysql
     mysql:
         image: 'mysql:8.0'
         ports:
@@ -45,5 +45,5 @@ networks:
     sail:
         driver: bridge
 volumes:
-    sailpgsql:
+    sailmysql:
         driver: local
