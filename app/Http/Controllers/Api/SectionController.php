@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SectionRequest;
+use App\Models\Page;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,10 @@ class SectionController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function index()
+    public function index(Page $page)
     {
-        //
+        $sections = Section::where('note_id', $page->id)->get();
+        return $this->success('List of Section for ' . $page->title . '.', $sections);
     }
 
     /**
@@ -25,7 +27,8 @@ class SectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
-        return Section::create($request->validated());
+        $section = Section::create($request->validated());
+        return $this->success('Section Created Successfully.', $section);
     }
 
     /**
@@ -35,7 +38,7 @@ class SectionController extends Controller
      */
     public function show(Section $section)
     {
-        return $section;
+        return $this->success('Section Detail.', $section);
     }
 
     /**
@@ -47,7 +50,7 @@ class SectionController extends Controller
     public function update(SectionRequest $request, Section $section)
     {
         $section->update($request->validated());
-        return $section;
+        return $this->success('Section Updated Successfully.', $section);
     }
 
     /**
@@ -58,6 +61,6 @@ class SectionController extends Controller
     public function destroy(Section $section)
     {
         $section->delete();
-        return $section;
+        return $this->success('Section Deleted Successfully.', $section);
     }
 }
