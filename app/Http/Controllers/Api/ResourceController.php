@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResourceRequest;
+use App\Http\Resources\ResourceResource;
 use App\Models\Resource;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -16,8 +17,9 @@ class ResourceController extends Controller
      */
     public function index(Section $section)
     {
-        $pages = Resource::where('section_id', $section->id)->get();
-        return $this->success('List of Resource for ' . $section->title . '.', $pages);
+        $data = Resource::where('section_id', $section->id)->get();
+        $resource = ResourceResource::collection($data);
+        return $this->success('List of Resource for ' . $section->title . '.', $resource);
     }
 
     /**
@@ -27,7 +29,7 @@ class ResourceController extends Controller
      */
     public function store(Request $request)
     {
-        $resource = Resource::create($request->validated());
+        $resource = new ResourceResource(Resource::create($request->validated()));
         return $this->success('Resource Created Successfully.', $resource);
     }
 
@@ -38,6 +40,7 @@ class ResourceController extends Controller
      */
     public function show(Resource $resource)
     {
+        $resource = new ResourceResource($resource);
         return $this->success('Resource Detail.', $resource);
     }
 
@@ -50,6 +53,7 @@ class ResourceController extends Controller
     public function update(Request $request, Resource $resource)
     {
         $resource->update($request->validated());
+        $resource = new ResourceResource($resource);
         return $this->success('Resource Updated Successfully.', $resource);
     }
 
@@ -61,6 +65,7 @@ class ResourceController extends Controller
     public function destroy(Resource $resource)
     {
         $resource->delete();
+        $resource = new ResourceResource($resource);
         return $this->success('Resource Deleted Successfully.', $resource);
     }
 }

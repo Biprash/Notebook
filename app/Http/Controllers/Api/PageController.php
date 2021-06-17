@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
+use App\Http\Resources\PageResource;
 use App\Models\Note;
 use App\Models\Page;
 
@@ -15,7 +16,8 @@ class PageController extends Controller
      */
     public function index(Note $note)
     {
-        $pages = Page::where('note_id', $note->id)->get();
+        $data = Page::where('note_id', $note->id)->get();
+        $pages = PageResource::collection($data);
         return $this->success('List of Pages for ' . $note->title . '.', $pages);
     }
 
@@ -26,7 +28,7 @@ class PageController extends Controller
      */
     public function store(PageRequest $request)
     {
-        $page = Page::create($request->validated());
+        $page = new PageResource(Page::create($request->validated()));
         return $this->success('Page Created Successfully.', $page);
     }
 
@@ -37,6 +39,7 @@ class PageController extends Controller
      */
     public function show(Page $page)
     {
+        $page = new PageResource($page);
         return $this->success('Page Detail.', $page);
     }
 
@@ -49,6 +52,7 @@ class PageController extends Controller
     public function update(PageRequest $request, Page $page)
     {
         $page->update($request->validated());
+        $page = new PageResource($page);
         return $this->success('Page Updated Successfully.', $page);
     }
 
@@ -60,6 +64,7 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         $page->delete();
+        $page = new PageResource($page);
         return $this->success('Page Deleted Successfully.', $page);
     }
 }
