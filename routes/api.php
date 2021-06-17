@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\NoteController;
+use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\SectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('pages/{note}/list', [PageController::class, 'index']);
+Route::get('sections/{page}/list', [PageController::class, 'index']);
+
+Route::apiResource('notes', NoteController::class);
+Route::apiResource('pages', PageController::class)->except('index');
+Route::apiResource('sections', SectionController::class)->except('index');

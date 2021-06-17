@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PageRequest;
+use App\Models\Note;
 use App\Models\Page;
 
 class PageController extends Controller
@@ -12,9 +13,10 @@ class PageController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function index()
+    public function index(Note $note)
     {
-        //
+        $pages = Page::where('note_id', $note->id)->get();
+        return $this->success('List of Pages for ' . $note->title . '.', $pages);
     }
 
     /**
@@ -24,7 +26,8 @@ class PageController extends Controller
      */
     public function store(PageRequest $request)
     {
-        return Page::create($request->validated());
+        $page = Page::create($request->validated());
+        return $this->success('Page Created Successfully.', $page);
     }
 
     /**
@@ -34,7 +37,7 @@ class PageController extends Controller
      */
     public function show(Page $page)
     {
-        return $page;
+        return $this->success('Page Detail.', $page);
     }
 
     /**
@@ -46,7 +49,7 @@ class PageController extends Controller
     public function update(PageRequest $request, Page $page)
     {
         $page->update($request->validated());
-        return $page;
+        return $this->success('Page Updated Successfully.', $page);
     }
 
     /**
@@ -57,6 +60,6 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         $page->delete();
-        return $page;
+        return $this->success('Page Deleted Successfully.', $page);
     }
 }

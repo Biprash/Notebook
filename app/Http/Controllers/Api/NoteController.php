@@ -14,7 +14,8 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        $notes = Note::where('user_id', auth()->user()->id)->get();
+        return $this->success('List of Notes.', $notes);
     }
 
     /**
@@ -24,7 +25,8 @@ class NoteController extends Controller
      */
     public function store(NoteRequest $request)
     {
-        return Note::create($request->validated());
+        $note = Note::create($request->validated());
+        return $this->success('Note Created Successfully.', $note);
     }
 
     /**
@@ -34,7 +36,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        return $note;
+        return $this->success('Note Detail', $note);
     }
 
     /**
@@ -46,7 +48,7 @@ class NoteController extends Controller
     public function update(NoteRequest $request, Note $note)
     {
         $note->update($request->validated());
-        return $note;
+        return $this->success('Note Updated Successfully.', $note);
     }
 
     /**
@@ -57,6 +59,6 @@ class NoteController extends Controller
     public function destroy(Note $note)
     {
         $note->delete();
-        return $note;
+        return $this->success('Note Deleted Successfully.', $note);
     }
 }
