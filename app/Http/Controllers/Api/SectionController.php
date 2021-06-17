@@ -16,7 +16,7 @@ class SectionController extends Controller
      */
     public function index(Page $page)
     {
-        $sections = Section::where('note_id', $page->id)->get();
+        $sections = Section::where('page_id', $page->id)->get();
         return $this->success('List of Section for ' . $page->title . '.', $sections);
     }
 
