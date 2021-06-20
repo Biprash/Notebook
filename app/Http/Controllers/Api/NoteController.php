@@ -15,7 +15,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $data = Note::where('user_id', auth()->user()->id)->get();
+        $data = Note::where('user_id', auth('sanctum')->user()->id)->get();
         $notes = NoteResource::collection($data);
         return $this->success('List of Notes.', $notes);
     }
