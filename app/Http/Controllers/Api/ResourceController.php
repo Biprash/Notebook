@@ -27,7 +27,7 @@ class ResourceController extends Controller
      *
      * @param  ResourceRequest  $request
      */
-    public function store(Request $request)
+    public function store(ResourceRequest $request)
     {
         $resource = new ResourceResource(Resource::create($request->validated()));
         return $this->success('Resource Created Successfully.', $resource);
@@ -50,7 +50,7 @@ class ResourceController extends Controller
      * @param  ResourceRequest  $request
      * @param  Resource  $resource
      */
-    public function update(Request $request, Resource $resource)
+    public function update(ResourceRequest $request, Resource $resource)
     {
         $resource->update($request->validated());
         $resource = new ResourceResource($resource);
