@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('pages/{note}/list', [PageController::class, 'index']);
-Route::get('sections/{page}/list', [PageController::class, 'index']);
+Route::get('sections/{page}/list', [SectionController::class, 'index']);
 Route::get('resources/{section}/list', [ResourceController::class, 'index']);
 
 Route::apiResource('notes', NoteController::class);
