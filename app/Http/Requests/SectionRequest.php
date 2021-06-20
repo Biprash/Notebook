@@ -24,7 +24,7 @@ class SectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'section_id' => ['required', 'exists:sections,id'],
+            'page_id' => ['required', 'exists:pages,id'],
             'title' => ['required'],
         ];
     }

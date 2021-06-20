@@ -27,7 +27,7 @@ class ResourceRequest extends FormRequest
             'section_id' => ['required', 'exists:sections,id'],
             'title' => ['required', 'string'],
             'link' => ['string'],
-//            'description' => [],
+            'description' => [],
         ];
     }
 }
