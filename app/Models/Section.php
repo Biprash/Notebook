@@ -18,4 +18,9 @@ class Section extends Model
     {
         return $this->belongsTo(Page::class);
     }
+
+    public function resources()
+    {
+        return $this->hasMany(Resource::class);
+    }
 }
