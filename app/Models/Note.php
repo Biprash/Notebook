@@ -25,4 +25,9 @@ class Note extends Model
     {
         return $this->belongsTo(Page::class);
     }
+
+    public function bookmarks()
+    {
+        return $this->belongsToMany(User::class, 'bookmarks');
+    }
 }
