@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BookmarkController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\ResourceController;
@@ -22,11 +23,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('pages/{note}/list', [PageController::class, 'index']);
-Route::get('sections/{page}/list', [SectionController::class, 'index']);
-Route::get('resources/{section}/list', [ResourceController::class, 'index']);
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/bookmarks', [BookmarkController::class, 'index']);
+    Route::get('/bookmarks/{note}', [BookmarkController::class, 'bookmark']);
 
-Route::apiResource('notes', NoteController::class);
-Route::apiResource('pages', PageController::class)->except('index');
-Route::apiResource('sections', SectionController::class)->except('index');
-Route::apiResource('resources', ResourceController::class)->except('index');
+    Route::get('pages/{note}/list', [PageController::class, 'index']);
+    Route::get('sections/{page}/list', [SectionController::class, 'index']);
+    Route::get('resources/{section}/list', [ResourceController::class, 'index']);
+
+    Route::apiResource('notes', NoteController::class);
+    Route::apiResource('pages', PageController::class)->except('index');
+    Route::apiResource('sections', SectionController::class)->except('index');
+    Route::apiResource('resources', ResourceController::class)->except('index');
+});
