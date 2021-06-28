@@ -38,6 +38,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
+        session()->push('notes.recently_viewed', $note->getKey());
         $note = new NoteResource($note);
         return $this->success('Note Detail', $note);
     }

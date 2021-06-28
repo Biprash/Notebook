@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BookmarkController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\RecentController;
 use App\Http\Controllers\Api\ResourceController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\SectionController;
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('search', [SearchController::class, 'search']);
+    Route::get('recently-viewed', [RecentController::class, 'index']);
 
     Route::get('bookmarks', [BookmarkController::class, 'index']);
     Route::get('bookmarks/{note}', [BookmarkController::class, 'bookmark']);
