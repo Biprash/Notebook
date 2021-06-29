@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('bookmarks', [BookmarkController::class, 'index']);
     Route::get('bookmarks/{note}', [BookmarkController::class, 'bookmark']);
 
+    Route::get('notes/{note}/publish', [NoteController::class, 'publish']);
     Route::get('pages/{note}/list', [PageController::class, 'index']);
     Route::get('sections/{page}/list', [SectionController::class, 'index']);
     Route::get('resources/{section}/list', [ResourceController::class, 'index']);
