@@ -6,9 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\NoteRequest;
 use App\Http\Resources\NoteResource;
 use App\Models\Note;
+use Carbon\Carbon;
 
 class NoteController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Note::class, 'note');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -66,5 +72,26 @@ class NoteController extends Controller
         $note->delete();
         $note = new NoteResource($note);
         return $this->success('Note Deleted Successfully.', $note);
+    }
+
+    /**
+     * Publish the specified resource.
+     *
+     * @param  Note  $note
+     */
+    public function publish(Note $note)
+    {
+        $this->authorize('publish', $note);
+        if ($note->published_at)
+        {
+            $note->published_at = null;
+            $note->save();
+            return $this->success('Note saved as Draft Successfully');
+        } else
+        {
+            $note->published_at = Carbon::now();
+            $note->save();
+            return $this->success('Note published Successfully');
+        }
     }
 }
