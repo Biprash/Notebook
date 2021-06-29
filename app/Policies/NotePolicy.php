@@ -13,8 +13,8 @@ class NotePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
-     * @return mixed
+     * @param  User  $user
+     * @return bool
      */
     public function viewAny(User $user)
     {
@@ -24,9 +24,9 @@ class NotePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Note  $note
-     * @return mixed
+     * @param  User  $user
+     * @param  Note  $note
+     * @return bool
      */
     public function view(User $user, Note $note)
     {
@@ -36,8 +36,8 @@ class NotePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
-     * @return mixed
+     * @param  User  $user
+     * @return bool
      */
     public function create(User $user)
     {
@@ -47,9 +47,9 @@ class NotePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Note  $note
-     * @return mixed
+     * @param  User  $user
+     * @param  Note  $note
+     * @return bool
      */
     public function update(User $user, Note $note)
     {
@@ -59,9 +59,9 @@ class NotePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Note  $note
-     * @return mixed
+     * @param  User  $user
+     * @param  Note  $note
+     * @return bool
      */
     public function delete(User $user, Note $note)
     {
@@ -69,35 +69,11 @@ class NotePolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Note  $note
-     * @return mixed
-     */
-    public function restore(User $user, Note $note)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Note  $note
-     * @return mixed
-     */
-    public function forceDelete(User $user, Note $note)
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can publish the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Note  $note
-     * @return mixed
+     * @param  User  $user
+     * @param  Note  $note
+     * @return bool
      */
     public function publish(User $user, Note $note)
     {
