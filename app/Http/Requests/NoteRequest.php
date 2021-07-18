@@ -24,9 +24,8 @@ class NoteRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'exists:users,id'],
             'title' => ['required', 'string'],
-//            'description' => [],
+            'description' => ['nullable'],
             'cover' => ['image', 'mimes:png,jpg,jpeg', 'max:5120']
         ];
     }
