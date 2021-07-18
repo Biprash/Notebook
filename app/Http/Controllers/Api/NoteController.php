@@ -33,7 +33,7 @@ class NoteController extends Controller
      */
     public function store(NoteRequest $request)
     {
-        $note = new NoteResource(Note::create($request->validated()));
+        $note = new NoteResource(auth()->user()->notes()->create($request->validated()));
         return $this->success('Note Created Successfully.', $note);
     }
 
