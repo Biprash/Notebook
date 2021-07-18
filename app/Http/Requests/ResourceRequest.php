@@ -26,7 +26,7 @@ class ResourceRequest extends FormRequest
         return [
             'section_id' => ['required', 'exists:sections,id'],
             'title' => ['required', 'string'],
-            'link' => ['string'],
+            'link' => ['max:255'],
             'description' => [],
         ];
     }
