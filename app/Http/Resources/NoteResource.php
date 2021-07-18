@@ -19,6 +19,7 @@ class NoteResource extends JsonResource
             'title' => $this->title,
             'description' => $this->when($this->description, $this->desctiption),
             'cover' => $this->when($this->cover, asset('storage', $this->cover)),
+            'published' => (bool)$this->published_at,
         ];
     }
 }
