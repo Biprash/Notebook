@@ -33,7 +33,13 @@ class NoteController extends Controller
      */
     public function store(NoteRequest $request)
     {
-        $note = new NoteResource(auth()->user()->notes()->create($request->validated()));
+        $attributes = $request->validated();
+        if ($request->hasFile('cover'))
+        {
+            $path = $request->cover->store('cover');
+            $attributes['cover'] = $path;
+        }
+        $note = new NoteResource(auth()->user()->notes()->create($attributes));
         return $this->success('Note Created Successfully.', $note);
     }
 
@@ -57,7 +63,13 @@ class NoteController extends Controller
      */
     public function update(NoteRequest $request, Note $note)
     {
-        $note->update($request->validated());
+        $attributes = $request->validated();
+        if ($request->hasFile('cover'))
+        {
+            $path = $request->cover->store('cover');
+            $attributes['cover'] = $path;
+        }
+        $note->update($attributes);
         $note = new NoteResource($note);
         return $this->success('Note Updated Successfully.', $note);
     }
