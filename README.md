@@ -69,6 +69,6 @@ The offical Notebook Frontend is done using React Typescript. You can download t
 ## Login credentials for default user
 
 ```
-		email: admin@demo.test
-		password: password
+    email: admin@demo.test
+    password: password
 ```
