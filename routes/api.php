@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\RecentController;
 use App\Http\Controllers\Api\ResourceController;
-use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\Publics\SearchController;
 use App\Http\Controllers\Api\SectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +26,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('search', [SearchController::class, 'search']);
     Route::get('recently-viewed', [RecentController::class, 'index']);
 
     Route::get('bookmarks', [BookmarkController::class, 'index']);
@@ -42,3 +41,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('sections', SectionController::class)->except('index');
     Route::apiResource('resources', ResourceController::class)->except('index');
 });
+
+
+Route::get('search', [SearchController::class, 'search']);
