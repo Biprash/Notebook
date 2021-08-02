@@ -20,6 +20,7 @@ class NoteResource extends JsonResource
             'description' => $this->when($this->description, $this->description),
             'cover' => $this->when($this->cover, asset('storage/'. $this->cover)),
             'published' => (bool)$this->published_at,
+            'is_bookmarked' => $this->is_bookmarked(auth()->user())
         ];
     }
 }

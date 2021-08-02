@@ -30,4 +30,8 @@ class Note extends Model
     {
         return $this->belongsToMany(User::class, 'bookmarks');
     }
+
+    public function is_bookmarked(User $user){
+        return $this->bookmarks->contains($user);
+    }
 }
