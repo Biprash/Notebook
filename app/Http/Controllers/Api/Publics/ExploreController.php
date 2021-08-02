@@ -29,10 +29,10 @@ class ExploreController extends Controller
     public function getResponse($recommend, $recently_added, $recent_viewed = null)
     {
         return [
-            [
-                'title' => 'Recently Viewed',
-                'data' => NoteResource::collection($recent_viewed)
-            ],
+//            [
+//                'title' => 'Recently Viewed',
+//                'data' => NoteResource::collection($recent_viewed)
+//            ],
             [
                 'title' => 'Recommend',
                 'data' => NoteResource::collection($recommend)
