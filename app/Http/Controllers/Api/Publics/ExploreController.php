@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Publics;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\NoteResource;
 use App\Models\Note;
 use Illuminate\Http\Request;
 
@@ -30,15 +31,15 @@ class ExploreController extends Controller
         return [
             [
                 'title' => 'Recently Viewed',
-                'data' => $recent_viewed
+                'data' => NoteResource::collection($recent_viewed)
             ],
             [
                 'title' => 'Recommend',
-                'data' => $recommend
+                'data' => NoteResource::collection($recommend)
             ],
             [
                 'title' => 'Recently Added',
-                'data' => $recently_added
+                'data' => NoteResource::collection($recently_added)
             ]
         ];
     }
