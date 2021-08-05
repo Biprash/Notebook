@@ -16,6 +16,7 @@ class PageController extends Controller
      */
     public function index(Note $note)
     {
+        session()->push('notes.recently_viewed', $note->getKey());
         $data = Page::where('note_id', $note->id)->get();
         $pages = PageResource::collection($data);
         return $this->success('List of Pages for ' . $note->title . '.', $pages);
