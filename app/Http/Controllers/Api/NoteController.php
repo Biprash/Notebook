@@ -21,7 +21,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $data = Note::where('user_id', auth('sanctum')->user()->id)->get();
+        $data = Note::where('user_id', auth('sanctum')->user()->getKey())->get();
         $notes = NoteResource::collection($data);
         return $this->success('List of Notes.', $notes);
     }
@@ -39,7 +39,14 @@ class NoteController extends Controller
             $path = $request->cover->store('cover');
             $attributes['cover'] = $path;
         }
-        $note = new NoteResource(auth()->user()->notes()->create($attributes));
+        $note = auth()->user()->notes()->create($attributes);
+        $page = $note->pages()->create([
+            'title' => 'Starter Page',
+            'note_id' => $note->id
+            ]);
+        $page->sections()->create(['title' => 'Notes']);
+        $page->sections()->create(['title' => 'Resources']);
+        $note = new NoteResource($note);
         return $this->success('Note Created Successfully.', $note);
     }
 
