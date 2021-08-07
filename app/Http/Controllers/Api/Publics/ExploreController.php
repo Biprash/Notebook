@@ -44,4 +44,9 @@ class ExploreController extends Controller
             ]
         ];
     }
+
+    public function allNotes()
+    {
+        return NoteResource::collection(Note::paginate(10));
+    }
 }

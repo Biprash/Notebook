@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('explore', [ExploreController::class, 'index']);
+Route::get('all-notes', [ExploreController::class, 'allNotes']);
 
 Route::get('pages/{note}/list', [PageController::class, 'index']);
 Route::get('sections/{page}/list', [SectionController::class, 'index']);
