@@ -17,8 +17,7 @@ class ProfileResource extends JsonResource
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'profile_pic' => $this->userDetail ? asset('storage/'. $this->userDetail->profile_pic) : null,
-            'socialLinks' => SocialLinkResource::collection($this->socialLinks) ?? null
+            'profile_pic' => $this->userDetail ? asset('storage/'. $this->userDetail->profile_pic) : null
         ];
     }
 }

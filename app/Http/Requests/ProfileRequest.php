@@ -28,9 +28,6 @@ class ProfileRequest extends FormRequest
             'name' => ['required'],
             'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->user()->getKey())],
             'profile_pic' => ['image', 'mimes:png,jpg,jpeg', 'max:5120'],
-            'socialLinks' => ['array', 'nullable'],
-            'socialLinks.*.type' => ['required'],
-            'socialLinks.*.link' => ['required'],
         ];
     }
 }

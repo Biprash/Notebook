@@ -26,17 +26,6 @@ class ProfileController extends Controller
                 ]);
             }
         }
-        if ($request->socialLinks && $request->socialLinks)
-        {
-            $request->user()->socialLinks()->delete();
-            foreach ($request->socialLinks as $socialLink)
-            {
-                $request->user()->socialLinks()->create([
-                    'type' => $socialLink['type'],
-                    'link' => $socialLink['link'],
-                ]);
-            }
-        }
         $profile = new ProfileResource(auth()->user());
         return $this->success('Profile Updated Successfully', $profile);
     }

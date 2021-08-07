@@ -55,9 +55,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Note::class, 'bookmarks');
     }
-
-    public function socialLinks()
-    {
-        return $this->hasMany(SocialLink::class);
-    }
 }
