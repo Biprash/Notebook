@@ -47,6 +47,6 @@ class ExploreController extends Controller
 
     public function allNotes()
     {
-        return NoteResource::collection(Note::paginate(10));
+        return NoteResource::collection(Note::orderBy('published_at', 'desc')->paginate(10));
     }
 }
